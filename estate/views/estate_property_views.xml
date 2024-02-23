@@ -11,6 +11,7 @@
                         </div>
                         <h1 class="mb32">
                             <field name="name" class="mb16"/>
+                            <field name="tag_ids" widget="many2many_tags" />
                         </h1>
                     </div>
                     <group>
