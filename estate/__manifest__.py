@@ -13,7 +13,11 @@
     ],
     "data": [
         # SECURITY
+        "security/res_groups.xml",
         # VIEWS
         # MENUS
     ],
+    "demo": [
+        "demo/demo.xml"
+    ]
 }
