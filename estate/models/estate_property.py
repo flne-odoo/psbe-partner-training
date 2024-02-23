@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from dateutil.relativedelta import relativedelta
 
 class EstateProperty(models.Model):
@@ -58,3 +58,23 @@ class EstateProperty(models.Model):
     def _compute_best_price(self):
         for estate in self:
             estate.best_price = estate.offer_ids and max(estate.offer_ids.mapped("price"))
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        for estate in self:
+            if estate.garden:
+                estate.garden_area = 10
+                estate.garden_orientation = "north"
+            else:
+                estate.garden_area = 0
+                estate.garden_orientation = False
+
+    @api.onchange("date_availability")
+    def _onchange_date_availability(self):
+        if self.date_availability < fields.Date.today():
+            return {
+                "warning": {
+                    "title": _("Warning"),
+                    "message": _("Date is in the past")
+                }
+            }
