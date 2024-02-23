@@ -46,4 +46,15 @@ class EstateProperty(models.Model):
     salesperson_id = fields.Many2one("res.users", default=lambda self: self.env.user)
     offer_ids = fields.One2many("estate.property.offer", "property_id")
     tag_ids = fields.Many2many("estate.property.tag")
-    
+    total_area = fields.Integer(compute="_compute_total_area")
+    best_price = fields.Float(compute="_compute_best_price")
+
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
+        for estate in self:
+            estate.total_area = estate.living_area + estate.garden_area
+
+    @api.depends("offer_ids.price")
+    def _compute_best_price(self):
+        for estate in self:
+            estate.best_price = estate.offer_ids and max(estate.offer_ids.mapped("price"))
