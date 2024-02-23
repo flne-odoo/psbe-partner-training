@@ -14,6 +14,7 @@
     "data": [
         # SECURITY
         "security/res_groups.xml",
+        "security/ir.model.access.csv",
         # VIEWS
         # MENUS
     ],
