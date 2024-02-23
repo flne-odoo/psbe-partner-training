@@ -44,4 +44,4 @@ class EstateProperty(models.Model):
     property_type_id = fields.Many2one("estate.property.type")
     buyer_id = fields.Many2one("res.partner", copy=False)
     salesperson_id = fields.Many2one("res.users", default=lambda self: self.env.user)
-
+    offer_ids = fields.One2many("estate.property.offer", "property_id")

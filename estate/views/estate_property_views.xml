@@ -35,6 +35,9 @@
                                 <field name="garden_area" />
                             </group>
                         </page>
+                        <page name="offers" string="Offers">
+                            <field name="offer_ids" />
+                        </page>
                         <page name="info" string="Other Info">
                             <group>
                                 <field name="salesperson_id" />
